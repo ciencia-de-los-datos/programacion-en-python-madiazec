@@ -13,7 +13,16 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 import csv
 
+def organizar_archivo():
+    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+        data = file.readlines()
 
+    # Limpieza
+    data = [line.replace("\t",',') for line in data]
+    data = [line.replace("\n",'') for line in data]
+    data = [line.split(",") for line in data]
+
+    return data
 
 def pregunta_01():
     """
@@ -22,13 +31,12 @@ def pregunta_01():
     214
 
     """
-
-    #with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
-    #    data = file.readlines()
+    data = organizar_archivo()
+    suma = 0
+    for i in range(len(data)):
+        suma = suma + int(data[i][1])
     
-    #x = data[0:2]
-    #print(x)
-    return 214
+    return suma
     
 pregunta_01()
 
