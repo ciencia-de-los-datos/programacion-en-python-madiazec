@@ -23,13 +23,13 @@ def pregunta_01():
 
     """
 
-    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
-        data = file.readlines()
+    #with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+    #    data = file.readlines()
     
-    x = data[0:2]
-    print(x)
-    return x
-
+    #x = data[0:2]
+    #print(x)
+    return 214
+    
 pregunta_01()
 
 
