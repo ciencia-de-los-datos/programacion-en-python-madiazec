@@ -11,17 +11,26 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import csv
+
 
 
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
-
     Rta/
     214
 
     """
-    return
+
+    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+        data = file.readlines()
+    
+    x = data[0:2]
+    print(x)
+    return x
+
+pregunta_01()
 
 
 def pregunta_02():
