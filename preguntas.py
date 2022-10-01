@@ -54,9 +54,35 @@ def pregunta_02():
         ("D", 6),
         ("E", 14),
     ]
-
+    
     """
-    return
+    data = organizar_archivo()
+
+    lista = ()
+    for index in range(len(data)):
+        lista = lista + tuple(data[index][0])
+    
+    unicos = []
+    temp = set()
+    for i in lista:
+        for j in i:
+            if not j in temp:
+                temp.add(j)
+                unicos.append(j)
+    unicos.sort()
+
+    sum = []
+    for i in unicos:
+        sum.append(lista.count(i))
+
+    result = []
+    for i in range(len(unicos)):
+        result.append([unicos[i],sum[i]])
+
+    for i in range(len(result)):
+        result[i] = tuple(result[i])
+
+    return result
 
 
 def pregunta_03():
