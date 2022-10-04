@@ -88,7 +88,7 @@ def pregunta_02():
 def pregunta_03():
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
-    de tuplas (letra, suma) ordendas alfabeticamente.
+    de tuplas (letra, suma) ordenads alfabeticamente.
 
     Rta/
     [
@@ -100,7 +100,46 @@ def pregunta_03():
     ]
 
     """
-    return
+    data = organizar_archivo()
+    lista = ()
+    for index in range(len(data)):
+        lista = lista + tuple(data[index][0])
+    
+    unicos = []
+    temp = set()
+    for i in lista:
+        for j in i:
+            if not j in temp:
+                temp.add(j)
+                unicos.append(j)
+    unicos.sort()
+    
+    def fun(letra,num,ini):
+        if letra == "A":
+            indice = 0
+        elif letra == "B":
+            indice = 1
+        elif letra == "C":
+            indice = 2
+        elif letra == "D":
+            indice = 3
+        else:
+            indice = 4
+        
+        ini[indice] += num
+
+        return ini
+
+    ini = [0, 0, 0, 0, 0]
+    for i in range(len(data)):
+        num = int(data[i][1])
+        letra = str(data[i][0])
+        fun(letra,num,ini)
+
+    listatuplas = list(zip(unicos,ini))
+    
+
+    return listatuplas
 
 
 def pregunta_04():
