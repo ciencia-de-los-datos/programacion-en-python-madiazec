@@ -172,6 +172,19 @@ def pregunta_04():
 
     return tup
 
+def hallar_min_max(lista_letras,lista_datos,data,org):
+    val = []
+    tup = []
+    for i in lista_letras:
+        for j in lista_datos:
+            if j[0] == i:
+                val.append(j[1])
+        if org == 'max':
+            tup.append((i,max(val),min(val)))
+        else:
+            tup.append((i,min(val),max(val)))
+        val.clear()
+    return tup
 
 def pregunta_05():
     """
@@ -188,8 +201,23 @@ def pregunta_05():
     ]
 
     """
-    return
+    data = organizar_archivo()
+    lista_letras = sorted(set([lines[0] for lines in data]))
+    lista_datos = [(line[0], int(line[1])) for line in data]
+    tup = hallar_min_max(lista_letras,lista_datos,data,'max')
 
+    return tup
+
+def organizar_dicc():
+    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+        data = file.readlines()
+
+    # Limpieza
+    data = [line.replace("\n",'') for line in data]
+    data = [line.split("\t") for line in data]
+    data = [line[4].split(",") for line in data]
+
+    return data
 
 def pregunta_06():
     """
@@ -213,7 +241,12 @@ def pregunta_06():
     ]
 
     """
-    return
+    data_dicc = organizar_dicc()
+    lista_claves = [(y[:3],int(y[4:]))for x in data_dicc for y in x]
+    dicc = sorted(set(elem[0]for elem in lista_claves))
+    tup = hallar_min_max(dicc, lista_claves, data_dicc,'min')
+    
+    return tup
 
 
 def pregunta_07():
@@ -237,7 +270,25 @@ def pregunta_07():
     ]
 
     """
-    return
+    with open("data.csv", "r") as file:
+            datos=file.readlines()
+    datos=[line.replace("\n","")for line in datos]
+    datos=[line.split("\t")for line in datos]
+
+    list_data=[(int(x[1]),x[0])for x in datos]
+
+    numeros=sorted(set(x[0]for x in list_data))
+    tup=[]
+    lett=[]
+
+    for i in numeros:
+        for j in list_data:
+            if (j[0] - i) == 0:
+                lett.append(j[1])
+        tup.append((i,lett))
+        lett=[]
+    
+    return tup
 
 
 def pregunta_08():
@@ -262,7 +313,25 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datos=file.readlines()
+    datos=[line.replace("\n","")for line in datos]
+    datos=[line.split("\t")for line in datos]
+
+    list_data=[(int(x[1]),x[0])for x in datos]
+
+    numeros=sorted(set(x[0]for x in list_data))
+    tup=[]
+    lett=[]
+
+    for i in numeros:
+        for j in list_data:
+            if (j[0] - i) == 0:
+                lett.append(j[1])
+        tup.append((i,sorted(set(lett))))
+        lett=[]
+
+    return tup
 
 
 def pregunta_09():
@@ -285,7 +354,12 @@ def pregunta_09():
     }
 
     """
-    return
+    data_dicc = organizar_dicc()
+    lista_claves = [y[:3]for x in data_dicc for y in x]
+    dicc = sorted(set(elem for elem in lista_claves))
+    tup = [(x, lista_claves.count(x)) for x in dicc]
+    dicc = dict(tup)
+    return dicc
 
 
 def pregunta_10():
@@ -306,7 +380,16 @@ def pregunta_10():
 
 
     """
-    return
+    with open("data.csv", "r")as file:
+        datos=file.readlines()
+    datos=[line.replace("\n", "")for line in datos]
+    datos=[line.split("\t")for line in datos]
+    dist_col4=[len(line[3].split(","))for line in datos]
+    dist_col5=[len(line[4].split(","))for line in datos]
+    col1=[(line[0])for line in datos]
+    rta=list(zip(col1,dist_col4,dist_col5))
+
+    return rta
 
 
 def pregunta_11():
@@ -327,7 +410,39 @@ def pregunta_11():
 
 
     """
-    return
+    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+        data = file.readlines()
+    
+    data = [line.replace("\n",'') for line in data]
+    data = [line.split("\t") for line in data]
+    col4 = [line[3].split(",") for line in data]
+    col2 = [int(line[1]) for line in data]
+
+    datos_letras_numero=list(zip(col4,col2))
+    lista_letra_num = []
+    count = 0
+
+    for elem in datos_letras_numero:
+        for i in elem[count]:
+            lista_letra_num.append((i,elem[1]))
+            count += 1
+        count = 0
+        
+    dict2 = {}
+
+    for llave,valor in lista_letra_num:
+        if llave in dict2.keys():
+            dict2[llave] += valor
+        else:
+            dict2[llave] = valor
+
+    sorted_keys = sorted(dict2)
+    dict2_sorted = {}
+
+    for x in sorted_keys:
+        dict2_sorted[x] = dict2[x]
+
+    return dict2_sorted
 
 
 def pregunta_12():
@@ -345,4 +460,23 @@ def pregunta_12():
     }
 
     """
-    return
+    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+        data = file.readlines()
+    
+    data = [line.replace("\n",'') for line in data]
+    data = [line.split("\t") for line in data]
+    col5 = [line[4].split(",") for line in data]
+    col1 = [line[0] for line in data]
+
+    union_col = list(zip(col1,col5))
+    dict_keys = sorted(set(col1))
+    dict = {}
+
+    for i in dict_keys:
+        dict[i] = 0
+
+    for i, j in union_col:
+        for k in j:
+            dict[i] += int(k[4:])
+
+    return dict
