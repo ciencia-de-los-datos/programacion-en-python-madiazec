@@ -14,7 +14,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 import csv
 
 def organizar_archivo():
-    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+    with open("data.csv","r") as file:
         data = file.readlines()
 
     # Limpieza
@@ -209,7 +209,7 @@ def pregunta_05():
     return tup
 
 def organizar_dicc():
-    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+    with open("data.csv","r") as file:
         data = file.readlines()
 
     # Limpieza
@@ -410,7 +410,7 @@ def pregunta_11():
 
 
     """
-    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+    with open("data.csv","r") as file:
         data = file.readlines()
     
     data = [line.replace("\n",'') for line in data]
@@ -460,7 +460,7 @@ def pregunta_12():
     }
 
     """
-    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+    with open("data.csv","r") as file:
         data = file.readlines()
     
     data = [line.replace("\n",'') for line in data]
