@@ -164,7 +164,13 @@ def pregunta_04():
     ]
 
     """
-    return
+    data = organizar_archivo()
+    list_dates = [line[2].split("-") for line in data]
+    list_month = [line[1]for line in list_dates]
+    months = sorted(set([line for line in list_month]))
+    tup = [(x,list_month.count(x))for x in months]
+
+    return tup
 
 
 def pregunta_05():
