@@ -11,17 +11,34 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import csv
 
+def organizar_archivo():
+    with open("C:\\Users\\nanad\\Documents\\GitHub\\programacion-en-python-madiazec\\data.csv","r") as file:
+        data = file.readlines()
+
+    # Limpieza
+    data = [line.replace("\t",',') for line in data]
+    data = [line.replace("\n",'') for line in data]
+    data = [line.split(",") for line in data]
+
+    return data
 
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
-
     Rta/
     214
 
     """
-    return
+    data = organizar_archivo()
+    suma = 0
+    for i in range(len(data)):
+        suma = suma + int(data[i][1])
+    
+    return suma
+    
+pregunta_01()
 
 
 def pregunta_02():
@@ -37,15 +54,41 @@ def pregunta_02():
         ("D", 6),
         ("E", 14),
     ]
-
+    
     """
-    return
+    data = organizar_archivo()
+
+    lista = ()
+    for index in range(len(data)):
+        lista = lista + tuple(data[index][0])
+    
+    unicos = []
+    temp = set()
+    for i in lista:
+        for j in i:
+            if not j in temp:
+                temp.add(j)
+                unicos.append(j)
+    unicos.sort()
+
+    sum = []
+    for i in unicos:
+        sum.append(lista.count(i))
+
+    result = []
+    for i in range(len(unicos)):
+        result.append([unicos[i],sum[i]])
+
+    for i in range(len(result)):
+        result[i] = tuple(result[i])
+
+    return result
 
 
 def pregunta_03():
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
-    de tuplas (letra, suma) ordendas alfabeticamente.
+    de tuplas (letra, suma) ordenads alfabeticamente.
 
     Rta/
     [
@@ -57,7 +100,46 @@ def pregunta_03():
     ]
 
     """
-    return
+    data = organizar_archivo()
+    lista = ()
+    for index in range(len(data)):
+        lista = lista + tuple(data[index][0])
+    
+    unicos = []
+    temp = set()
+    for i in lista:
+        for j in i:
+            if not j in temp:
+                temp.add(j)
+                unicos.append(j)
+    unicos.sort()
+    
+    def fun(letra,num,ini):
+        if letra == "A":
+            indice = 0
+        elif letra == "B":
+            indice = 1
+        elif letra == "C":
+            indice = 2
+        elif letra == "D":
+            indice = 3
+        else:
+            indice = 4
+        
+        ini[indice] += num
+
+        return ini
+
+    ini = [0, 0, 0, 0, 0]
+    for i in range(len(data)):
+        num = int(data[i][1])
+        letra = str(data[i][0])
+        fun(letra,num,ini)
+
+    listatuplas = list(zip(unicos,ini))
+    
+
+    return listatuplas
 
 
 def pregunta_04():
@@ -82,7 +164,13 @@ def pregunta_04():
     ]
 
     """
-    return
+    data = organizar_archivo()
+    list_dates = [line[2].split("-") for line in data]
+    list_month = [line[1]for line in list_dates]
+    months = sorted(set([line for line in list_month]))
+    tup = [(x,list_month.count(x))for x in months]
+
+    return tup
 
 
 def pregunta_05():
